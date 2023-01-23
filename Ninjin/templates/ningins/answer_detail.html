@@ -1,0 +1,59 @@
+{% load pygmentize %}
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" href="{% static 'css/answer_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="nav">
+        <input id="drawer_input" class="drawer_hidden" type="checkbox">
+        <label for="drawer_input" class="drawer_open"><span></span></label>
+        <nav class="nav_content">
+            <a class="menu">menu</a>
+            <hr>
+            <ul class="nav_list">
+                <li class="nav_item"><a href="#">HOME</a></li>
+                <hr>
+                <li class="nav_item"><a href="#">お題を見る</a></li>
+                <hr>
+                <li class="nav_item"><a href="#">ログイン・新規登録</a></li>
+                <hr>
+            </ul>
+        </nav>
+    </div>
+    <a href="#" onclick="history.back(-1);return false"><img src="{% static 'images/return.png' %}" class="return"></a>
+</header>
+
+<h2>{{ posts.theme_title }} by {{ posts.post_by_user.name }}</h2>
+
+<div class="snippet-date">
+    投稿日: {{ posts.posted_at|date:"DATETIME_FORMAT" }}
+    {% if user.is_authenticated and posts.post_by_user.name == user.id %}
+    <a href="#">編集</a>
+    {% endif %}
+</div>
+
+
+<div class="card">
+    {% if user.is_authenticated %}
+    <div class="card-body">
+        <h4 class="card-title">コメントを投稿する</h4>
+        <form method="post" action="{% url 'answer_new' posts.id %}">
+            {% csrf_token %}
+            {% bootstrap_form answer_form %}
+            {% bootstrap_button button_type="submit" content="コメント" %}
+        </form>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

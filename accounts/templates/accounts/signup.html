@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<hr>
+    <div class="container">
+        <div class="row">
+            <div class="offset-2">
+                <h3>新規登録</h3>
+                <!-- 新規登録のフォームを配置 -->
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- formからフィールドを取り出す -->
+                    {% for field in form %}
+                    <p>
+                        <!-- ラベルの出力 -->
+                        {{ field.label_tag }}<br>
+                        <!-- <input>タグを出力 -->
+                        {{ field }}
+                        <!-- help_textを出力 -->
+                        {% if field.help_text %}
+                        <small style="color: grey">{{ field.help_text }}</small>
+                        {% endif %}
+                        <!-- error発生時のテキストをerrors出力 -->
+                        {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                    {% endfor %}
+                    <p style="color: red">
+                        ※メールアドレスはパスワードをリセットする際に必要となりますので、
+                        　登録をお願いします。
+                    </p>
+                    <!-- 新規登録ボタンの出力 -->
+                    <input type="submit" value="新規登録">
+                </form>
+                <!-- index.htmlのリンクテキスト -->
+                <br>
+                <p><a href="{% url 'top' %}">
+                    登録をやめてトップページに戻る
+                </a> </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

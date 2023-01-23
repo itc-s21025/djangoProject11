@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+    margin: 13%;
+    font-size: 400%;
+}
+
+.return_home_btn {
+    cursor: pointer;
+    width: 20%;
+    height: 20%;
+}
+
+.return_home {
+    text-align: center;
+    margin: -5%;
+}

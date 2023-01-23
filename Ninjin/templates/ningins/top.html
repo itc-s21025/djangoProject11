@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>大喜利にんじん</title>
+    <link rel="stylesheet" href="{% static 'css/title.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+</head>
+<body>
+    <header class="header">
+      <div class="nav">
+        <input id="drawer_input" class="drawer_hidden" type="checkbox">
+        <label for="drawer_input" class="drawer_open"><span></span></label>
+        <nav class="nav_content">
+            <a class="menu">menu</a><hr>
+              <ul class="nav_list">
+                  {% if user.is_authenticated %}
+                  <!-- ログイン中のメニュー -->
+                <li class="nav_item"><a href="#">お題を見る</a></li><hr>
+                <li class="nav_item"><a href="#">お題を投稿</a></li><hr>
+                <li class="nav_item"><a href="{% url 'logout' %}">ログアウト</a> </li><hr>
+
+                  {% else %}
+                  <li class="nav_item"><a href="#">お題を見る</a></li><hr>
+                  <li class="nav_item"><a href="#">お題を投稿</a></li><hr>
+                  <li class="nav_item"><a href="{% url 'login' %}">ログイン・新規登録</a> </li><hr>
+                  {% endif %}
+              </ul>
+        </nav>
+      </div>
+    {% if user.is_authenticated %}
+    {% else %}
+        <div class="login_content">
+            <a href="{% url 'login' %}">
+                <img src="{% static 'images/login_btn.png' %}" class="login"></a>
+        </div>
+    {% endif %}
+    </header>
+
+    <img src="{% static 'images/title.png' %}" class="title">
+    <ul class="btn">
+        <li class="btn_item">
+            <a href="{% url 'category' %}">
+                <img src="{% static 'images/odaiwotoukou_btn.png' %}" class="title_btn">
+            </a>
+        </li>
+        <li class="btn_item">
+            <a href="{% url 'answer_category' %}">
+                <img src="{% static 'images/odaiwomiru_btn.png' %}" class="title_btn">
+            </a>
+        </li>
+    </ul>
+</body>
+</html>
+

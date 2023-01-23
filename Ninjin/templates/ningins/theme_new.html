@@ -1,0 +1,35 @@
+{% load static %}
+{% load django_bootstrap5 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="welcome">
+        <h1>お題を投稿しよう！</h1>
+        <p>面白いお題おまちしてます！</p>
+    </div>
+    <div class="form-group">
+            <h2>お題のカテゴリ</h2>
+            <div style="pointer-events: none;">
+            {{ form.post_category|add_class:'form-control' }}
+            </div>
+            <h2>お題を入力してください</h2>
+            {{ form.theme_title|add_class:'form-control' }}　<br>
+        <button type="submit">投稿する</button>
+            <b><p>大喜利のお題投稿例</p></b>
+            <p>・こんな学校は嫌だ、どんな学校？</p>
+            <p>・インスタグラマーって70歳になったらどんな投稿しているの？</p>
+    </div>
+</form>
+</body>
+</html>

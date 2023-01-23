@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+    margin: 13%;
+    font-size: 400%;
+}
+
+.delete_cancel {
+    display: flex;
+}
+
+.delete_cancel_btns {
+    list-style: none;
+    margin: auto;
+    width: 45%;
+}
+
+.delete_cancel_btn {
+    cursor: pointer;
+}

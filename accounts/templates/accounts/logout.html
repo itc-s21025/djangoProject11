@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大喜利にんじん</title>
+    <link rel="stylesheet" href="{% static 'css/logout&post_complete.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+</head>
+<body>
+    <header class="header">
+      <div class="nav">
+        <input id="drawer_input" class="drawer_hidden" type="checkbox">
+        <label for="drawer_input" class="drawer_open"><span></span></label>
+        <nav class="nav_content">
+            <a class="menu">menu</a><hr>
+              <ul class="nav_list">
+                  {% if user.is_authenticated %}
+                  <!-- ログイン中のメニュー -->
+                <li class="nav_item"><a href="">お題を見る</a></li><hr>
+                <li class="nav_item"><a href="#">お題を投稿</a></li><hr>
+                <li class="nav_item"><a href="">ログアウト</a> </li><hr>
+
+                  {% else %}
+                  <li class="nav_item"><a href="">お題を見る</a></li><hr>
+                  <li class="nav_item"><a href="#">お題を投稿</a></li><hr>
+                  <li class="nav_item"><a href="">ログイン・新規登録</a> </li><hr>
+                  {% endif %}
+              </ul>
+        </nav>
+      </div>
+        <a href="#" onclick="history.back(-1);return false"><img src="{% static 'images/return.png' %}" class="return"></a>
+    </header>
+
+    <h1>ログアウトしました</h1>
+    <div class="return_home">
+        <a href="{% url 'top' %}">
+            <img src="{% static 'images/return_home_btn.png' %}" class="return_home_btn">
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" href="{% static 'css/answer_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="nav">
+        <input id="drawer_input" class="drawer_hidden" type="checkbox">
+        <label for="drawer_input" class="drawer_open"><span></span></label>
+        <nav class="nav_content">
+            <a class="menu">menu</a>
+            <hr>
+            <ul class="nav_list">
+                <li class="nav_item"><a href="#">HOME</a></li>
+                <hr>
+                <li class="nav_item"><a href="#">お題を見る</a></li>
+                <hr>
+                <li class="nav_item"><a href="#">ログイン・新規登録</a></li>
+                <hr>
+            </ul>
+        </nav>
+    </div>
+    <a href="#" onclick="history.back(-1);return false"><img src="{% static 'images/return.png' %}" class="return"></a>
+</header>
+<div class="welcome">
+    <h1>お題一覧</h1>
+    <p>気になるお題に対して回答をしてみよう!!</p>
+</div>
+{% if posts %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>投稿者</th>
+            <th>投稿日</th>
+            <th>お題</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <th>{{ post.post_by_user }}</th>
+                <th>{{ post.posted_at }}</th>
+                <th><a href="{% url 'tested' post.id %}">{{ post.theme_title }}</a>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <p>スニペットはまだ投稿されていません。</p>
+{% endif %}
+
+</body>
+</html>

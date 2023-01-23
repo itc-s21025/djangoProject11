@@ -1,0 +1,37 @@
+body {
+    background-image: url("../images/ninzin.png");
+    background-repeat: no-repeat;
+    background-position: right bottom 100%;
+    background-size: 25%;
+}
+
+.title {
+    width: 50%;
+    height: 50%;
+}
+
+.btn {
+    display: flex;
+}
+
+.btn_item {
+    list-style: none;
+    width: 25%;
+}
+
+.title_btn {
+    width: 80%;
+    cursor: pointer;
+}
+
+.login {
+    width: 65%;
+    height: 65%;
+    cursor: pointer;
+}
+
+.login_content {
+    top: 5%;
+    left: 53%;
+    position: absolute;
+}

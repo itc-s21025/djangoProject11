@@ -1,0 +1,20 @@
+.welcome {
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    background-color: #fdfd01;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #000000;
+}
+
+p {
+  font-weight:bold;
+}
+
+th {
+    padding: 0.5rem;
+}
+

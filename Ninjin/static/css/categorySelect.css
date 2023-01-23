@@ -1,0 +1,16 @@
+.category {
+    display: flex;
+    list-style: none;
+    margin: auto;
+    width: 90%;
+}
+
+.select_btn {
+    width: 90%;
+    cursor: pointer;
+
+}
+
+.select_btn:hover {
+    border: 1px solid #ccc;
+}

@@ -7,6 +7,7 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}" id="favicon">
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/answer_list.css' %}">
     <style>
     ul.ul1 {
         display: flex;
@@ -26,6 +27,10 @@
 {% block content %}
     {% include 'ningins/header.html' %}
 {% endblock %}
+
+<div class="welcome">
+    <h1>お題見〰ちゃお！！</h1>
+</div>
 
 <ul class="ul1">
     <a href="{% url 'answer_list' 1 %}"><li class="li1"><img src="{% static 'images/oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>

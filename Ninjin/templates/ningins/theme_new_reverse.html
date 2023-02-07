@@ -1,6 +1,4 @@
 {% load static %}
-{% load django_bootstrap5 %}
-{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -29,10 +27,10 @@
     <div class="form-group">
             <h2>お題のカテゴリ</h2>
             <div style="pointer-events: none;">
-            {{ form.post_category|add_class:'form-control' }}
+            {{ form.post_category }}
             </div>
             <h2>お題を入力してください</h2>
-            {{ form.theme_title|add_class:'form-control' }}　
+            {{ form.theme_title }}　
         <br>
         <input type="image" src="{% static 'images/toukou_btn2.png' %}" alt="btn">
 

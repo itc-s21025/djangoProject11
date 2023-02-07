@@ -39,10 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Ninjin.apps.NinginConfig',
     'accounts.apps.AccountsConfig',
-    'django_bootstrap5',
-    'pygments_renderer',
-    'widget_tweaks',
-
 ]
 
 MIDDLEWARE = [

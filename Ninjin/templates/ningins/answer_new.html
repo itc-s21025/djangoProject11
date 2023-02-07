@@ -1,0 +1,48 @@
+{% load pygmentize %}
+{% load static %}
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" id="favicon">
+    <link rel="stylesheet" href="{% static 'css/background.css' %}">
+    <link rel="stylesheet" href="{% static 'css/answer_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+
+</head>
+{% block content %}
+    {% include 'ningins/header.html' %}
+{% endblock %}
+
+<body>
+
+<h2> お題： {{ posts.theme_title }}</h2>
+<p>出題者： {{ posts.post_by_user }}</p>
+
+<div class="snippet-date">
+    投稿日: {{ posts.posted_at|date:"DATETIME_FORMAT" }}
+    {% if user.is_authenticated and posts.post_by_user.name == user.id %}
+    <a href="#">編集</a>
+    {% endif %}
+</div>
+
+
+<div class="card">
+    {% if user.is_authenticated %}
+    <div class="card-body">
+        <h4 class="card-title">回答欄</h4>
+        <form method="post" action="{% url 'answer_new' posts.id %}">
+            {% csrf_token %}
+            {{ answer_form.text }}
+            <br>
+        <input type="image" src="{% static 'images/toukou_btn2.png' %}" alt="btn">
+        </form>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
+

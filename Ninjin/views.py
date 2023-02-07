@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -26,9 +27,32 @@ def answer_list(request, category_id):
     posts = Post.objects.filter(
         post_category=category_id).order_by('-posted_at')
 
+    paginator = Paginator(posts, 9)
+    page_number = request.GET.get('page', 1)
+    pages = paginator.page(page_number)
 
-    context = {"posts": posts }
+    context = {"orderby_records": pages}
     return render(request, "ningins/answer_list.html", context)
+
+def answer_list_image(request, category_id):
+
+    posts = Post.objects.filter(
+        post_category=category_id).order_by('-posted_at')
+
+    paginator = Paginator(posts, 9)
+    page_number = request.GET.get('page', 1)
+    pages = paginator.page(page_number)
+
+    context = {"orderby_records": pages}
+
+    return render(request, "ningins/answer_list_image.html", context)
+
+
+def theme_success(request):
+    return render(request, 'ningins/success_theme.html')
+
+def answer_success(request):
+    return (render(request, 'ningins/success_answer.html'))
 
 @login_required
 def ogiri_theme_new(request):
@@ -41,7 +65,7 @@ def ogiri_theme_new(request):
             theme.save()
             messages.add_message(request, messages.SUCCESS,
                                  "お題を作成しました。")
-            return redirect(answer_detail, post_id=theme.pk)
+            return redirect(theme_success)
         else:
             messages.add_message(request, messages.ERROR,
                                  "お題の作成に失敗しました。")
@@ -125,12 +149,32 @@ def ogiri_theme_new_image(request):
     return render(request, "ningins/theme_new_image.html", {'form': form})
 
 @login_required
+def ogiri_theme_new_kaku(request):
+    initial_values = {"post_category": 5}
+    if request.method == "POST":
+        form = OgiriThemeForm(request.POST,initial_values)
+        if form.is_valid():
+            theme = form.save(commit=False)
+            theme.post_by_user = request.user
+            theme.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 "お題を作成しました。")
+            return redirect(answer_detail, post_id=theme.pk)
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 "お題の作成に失敗しました。")
+    else:
+        form = OgiriThemeForm(initial_values)
+    return render(request, "ningins/theme_new_kaku.html", {'form': form})
+
+
+@login_required
 def answer_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     answers = Answer.objects.filter(answer_to=post_id).all()
     answer_form = AnswerForm()
 
-    return render(request, "ningins/answer_detail.html", {
+    return render(request, "ningins/answer_new.html", {
         'posts': post,
         'answers': answers,
         'answer_form': answer_form,
@@ -151,10 +195,10 @@ def answer_new(request, post_id):
     else:
         messages.add_message(request, messages.ERROR,
                              "コメントの投稿に失敗しました。")
-    return redirect('top',)
+    return redirect('success_answer',)
 
 class PostDetail(generic.DetailView):
-    template_name = 'ningins/test2.html'
+    template_name = 'ningins/detail_list.html'
     model = Post
 
     def get_context_data(self, **kwargs):
@@ -219,3 +263,34 @@ def like_for_comment(request):
     context['like_for_comment_count'] = comment.likeforcomment_set.count()
 
     return JsonResponse(context)
+
+class ImageDetail(generic.DetailView):
+    template_name = 'ningins/detail_image_list.html'
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        like_for_post_count = self.object.likeforpost_set.count()
+        context['like_for_post_count'] = like_for_post_count
+        # ログイン中のユーザーがイイねしているかどうか
+        is_user_liked_for_post = False
+        if not self.request.user.is_anonymous:
+            if self.object.likeforpost_set.filter(user=self.request.user).exists():
+                is_user_liked_for_post = True
+        context['is_user_liked_for_post'] = is_user_liked_for_post
+
+
+        # {'pk':{'count':コメントに対するイイネ数,'is_user_like_for_comment':bool},}という辞書を追加していく
+        d = {}
+        for comment in self.object.answer_set.all():
+            like_for_comment_count = comment.likeforcomment_set.count()
+            is_user_liked_for_comment = False
+            if not self.request.user.is_anonymous:
+                if comment.likeforcomment_set.filter(like_for_user_id=self.request.user).exists():
+                    is_user_liked_for_comment = True
+            d[comment.pk] = {'count': like_for_comment_count, 'is_user_liked_for_comment': is_user_liked_for_comment}
+
+        context['comment_like_data'] = d
+
+        return context
+

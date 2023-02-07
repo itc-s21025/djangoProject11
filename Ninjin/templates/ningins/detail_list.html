@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" id="favicon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
@@ -24,6 +24,9 @@
 
 
 <body>
+{% block content %}
+    {% include 'ningins/header.html' %}
+{% endblock %}
 <section class="mt-5">
     <div class="card">
         <div class="card-header">
@@ -42,7 +45,7 @@
 
         <div class="card-body">
             <div class="card-title">
-                <h2>#{{ post.pk }} {{ post.theme_title }}</h2>
+                <h2>お題 :　{{ post.theme_title }}</h2>
             </div>
             <div class="card-text">
                 <span class="fs-6">{{ post.posted_at | date:'Y-m-d' }}</span>
@@ -54,16 +57,16 @@
         </div>
     </div>
 
-    {% for comment in post.answer_set.all %}
+    {% for comment in post.answer_set.all.order_by %}
         <div class="card mt-4">
             <div class="card-body">
                 <div class="card-title">
                     <span class="fs-6">{{ comment.posted_at | date:'Y-m-d' }}</span>
-                    <p class="fs-6">{{ comment.answer_by }}</p>
+                    <p class="fs-6">ユーザー名：{{ comment.answer_by }}</p>
                 </div>
                 <div class="card-text">
                     <div class="mt-4 mb-4">
-                        {{ comment.text }}
+                        <h2>{{ comment.text }}</h2>
                     </div>
                     <div class="card-footer">
                         {% with comment_like_data|get_item:comment.pk as dic %}
@@ -86,6 +89,7 @@
             </div>
         </div>
     {% endfor %}
+
 </section>
 
 

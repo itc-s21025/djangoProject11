@@ -52,6 +52,7 @@ hr {
 .menu {
     font-size: 250%;
     font-family: "DejaVu Sans", serif;
+    color: black;
 }
 
 .nav_list a {

@@ -6,11 +6,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" id="favicon">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
 </head>
 <body>
+{% block content %}
+    {% include 'ningins/header.html' %}
+{% endblock %}
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -18,6 +23,9 @@
         <h1>お題を投稿しよう！</h1>
         <p>面白いお題おまちしてます！</p>
     </div>
+    <b><p>大喜利のお題投稿例</p></b>
+            <p>・馬息子</p>
+            <p>・セグウェイに乗って出勤してくる</p>
     <div class="form-group">
             <h2>お題のカテゴリ</h2>
             <div style="pointer-events: none;">
@@ -25,9 +33,9 @@
             </div>
             <h2>お題を入力してください</h2>
             {{ form.theme_title|add_class:'form-control' }}　
-            <b><p>大喜利のお題投稿例</p></b>
-            <p>・馬息子</p>
-            <p>・セグウェイに乗って出勤してくる</p>
+        <br>
+        <input type="image" src="{% static 'images/toukou_btn2.png' %}" alt="btn">
+
     </div>
 </form>
 </body>

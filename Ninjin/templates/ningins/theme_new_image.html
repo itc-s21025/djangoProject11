@@ -6,11 +6,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" id="favicon">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
 </head>
 <body>
+
+{% block content %}
+    {% include 'ningins/header.html' %}
+{% endblock %}
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -25,6 +31,8 @@
             </div>
             <h2>画像をアップロードしてください</h2>
             {{ form.image }}
+        <br>
+        <input type="image" src="{% static 'images/toukou_btn2.png' %}" alt="btn">
     </div>
 </form>
 </body>

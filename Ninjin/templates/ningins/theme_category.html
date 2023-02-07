@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>大喜利にんじん</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" id="favicon">
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <style>
@@ -22,25 +23,9 @@
 </style>
 </head>
 <body>
-<header class="header">
-    <div class="nav">
-        <input id="drawer_input" class="drawer_hidden" type="checkbox">
-        <label for="drawer_input" class="drawer_open"><span></span></label>
-        <nav class="nav_content">
-            <a class="menu">menu</a>
-            <hr>
-            <ul class="nav_list">
-                <li class="nav_item"><a href="#">HOME</a></li>
-                <hr>
-                <li class="nav_item"><a href="#">お題を見る</a></li>
-                <hr>
-                <li class="nav_item"><a href="#">ログイン・新規登録</a></li>
-                <hr>
-            </ul>
-        </nav>
-    </div>
-    <a href="#" onclick="history.back(-1);return false"><img src="{% static 'images/return.png' %}" class="return"></a>
-</header>
+{% block content %}
+    {% include 'ningins/header.html' %}
+{% endblock %}
 
 <ul class="ul1">
     <a href="{% url 'theme_new' %}"><li class="li1"><img src="{% static 'images/oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
@@ -49,7 +34,7 @@
 </ul>
 <ul class="ul1">
     <a href="{% url 'theme_new_narikiri' %}"><li class="li1"><img src="{% static 'images/narikiri_oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="#"><li class="li1"><img src="#" width="500" height="400" alt=""/></li></a>
+    <a href="{% url 'theme_new_kaku' %}"><li class="li1"><img src="{% static 'images/kakumarumaruoogiri.png' %}" width="500" height="400" alt=""/></li></a>
 </ul>
 
 </body>

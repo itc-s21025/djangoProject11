@@ -12,5 +12,6 @@ services:
       MYSQL_DATABASE: demo
       TZ: "Asia/Tokyo"
     volumes:
-      - ./my.cnf:/etc/mysql/conf.d/my.cnf
-
+      - ./db/data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./db/conf:/etc/mysql/conf.d

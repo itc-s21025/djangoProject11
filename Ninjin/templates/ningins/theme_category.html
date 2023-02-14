@@ -20,6 +20,9 @@
     li.li1:nth-child(2) {
         margin: 0 10px;
     }
+    .nav_item {
+        font-size: 300%;
+    }
 </style>
 </head>
 <body>
@@ -28,13 +31,14 @@
 {% endblock %}
 
 <ul class="ul1">
-    <a href="{% url 'theme_new' %}"><li class="li1"><img src="{% static 'images/oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="{% url 'theme_new_image' %}"><li class="li1"><img src="{% static 'images/gazoude_hitokoto_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="{% url 'theme_new_reverse' %}"><li class="li1"><img src="{% static 'images/gyaku_oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
+    <a href="{% url 'theme_new' %}"><li class="li1"><img src="{% static 'images/oogiri_btn.png' %}" width="340" height="230" alt=""/></li></a>
+    <a href="{% url 'theme_new_image' %}"><li class="li1"><img src="{% static 'images/gazoude_hitokoto_btn.png' %}" width="340" height="230" alt=""/></li></a>
+    <a href="{% url 'theme_new_reverse' %}"><li class="li1"><img src="{% static 'images/gyaku_oogiri_btn.png' %}" width="340" height="230" alt=""/></li></a>
 </ul>
 <ul class="ul1">
-    <a href="{% url 'theme_new_narikiri' %}"><li class="li1"><img src="{% static 'images/narikiri_oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="{% url 'theme_new_kaku' %}"><li class="li1"><img src="{% static 'images/kakumarumaruoogiri.png' %}" width="500" height="400" alt=""/></li></a>
+    <a href="{% url 'theme_new_narikiri' %}"><li class="li1"><img src="{% static 'images/narikiri_oogiri_btn.png' %}" width="340" height="230" alt=""/></li></a>
+    <a href="{% url 'theme_new_kaku' %}"><li class="li1"><img src="{% static 'images/kakumarumaruoogiri.png' %}" width="340" height="230" alt=""/></li></a>
+    <a href="{% url 'theme_new_aruaru' %}"><li class="li1"><img src="{% static 'images/aruarubutton.png' %}" width="340" height="230" alt=""/></li></a>
 </ul>
 
 </body>

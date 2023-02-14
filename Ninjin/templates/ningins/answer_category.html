@@ -8,37 +8,54 @@
     <link rel="stylesheet" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
     <link rel="stylesheet" href="{% static 'css/answer_list.css' %}">
-
-    {% block content %}
-    {% include 'ningins/head.html' %}
     <style>
-    ul.ul1 {
-        display: flex;
-        justify-content: center;
-    }
+        ul.ul1 {
+            display: flex;
+            justify-content: center;
+        }
 
-    li.li1 {
-        list-style: none;
-    }
+        li.li1 {
+            list-style: none;
+        }
 
-    li.li1:nth-child(2) {
-        margin: 0 10px;
+        li.li1:nth-child(2) {
+            margin: 0 10px;
+        }
+        .nav_item {
+        font-size: 300%;
     }
-</style>
+    </style>
 </head>
 <body>
-
+{% block content %}
     {% include 'ningins/header.html' %}
 {% endblock %}
 
 <ul class="ul1">
-    <a href="{% url 'answer_list' 1 %}"><li class="li1"><img src="{% static 'images/oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="{% url 'answer_list_image' 2 %}"><li class="li1"><img src="{% static 'images/gazoude_hitokoto_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="{% url 'answer_list' 3 %}"><li class="li1"><img src="{% static 'images/gyaku_oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
+    <a href="{% url 'answer_list' 1 %}">
+        <li class="li1"><img src="{% static 'images/oogiri_btn.png' %}" width="340" height="230" alt=""/></li>
+    </a>
+    <a href="{% url 'answer_list_image' 2 %}">
+        <li class="li1"><img src="{% static 'images/gazoude_hitokoto_btn.png' %}" width="340" height="230" alt=""/>
+        </li>
+    </a>
+    <a href="{% url 'answer_list' 3 %}">
+        <li class="li1"><img src="{% static 'images/gyaku_oogiri_btn.png' %}" width="340" height="230" alt=""/></li>
+    </a>
 </ul>
 <ul class="ul1">
-    <a href="{% url 'answer_list' 4 %}"><li class="li1"><img src="{% static 'images/narikiri_oogiri_btn.png' %}" width="500" height="400" alt=""/></li></a>
-    <a href="{% url 'answer_list' 5 %}"><li class="li1"><img src="{% static 'images/kakumarumaruoogiri.png' %}" width="500" height="400" alt=""/></li></a>
+    <a href="{% url 'answer_list' 4 %}">
+        <li class="li1"><img src="{% static 'images/narikiri_oogiri_btn.png' %}" width="340" height="230" alt=""/>
+        </li>
+    </a>
+    <a href="{% url 'answer_list' 5 %}">
+        <li class="li1"><img src="{% static 'images/kakumarumaruoogiri.png' %}" width="340/" height="230" alt=""/>
+        </li>
+    </a>
+    <a href="{% url 'answer_list' 5 %}">
+        <li class="li1"><img src="{% static 'images/aruarubutton.png' %}" width="340/" height="230" alt=""/>
+        </li>
+    </a>
 </ul>
 </body>
 </html>

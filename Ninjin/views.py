@@ -167,6 +167,25 @@ def ogiri_theme_new_kaku(request):
         form = OgiriThemeForm(initial_values)
     return render(request, "ningins/theme_new_kaku.html", {'form': form})
 
+@login_required
+def ogiri_theme_new_aruaru(request):
+    initial_values = {"post_category": 6}
+    if request.method == "POST":
+        form = OgiriThemeForm(request.POST,initial_values)
+        if form.is_valid():
+            theme = form.save(commit=False)
+            theme.post_by_user = request.user
+            theme.save()
+            messages.add_message(request, messages.SUCCESS,
+                                 "お題を作成しました。")
+            return redirect(answer_detail, post_id=theme.pk)
+        else:
+            messages.add_message(request, messages.ERROR,
+                                 "お題の作成に失敗しました。")
+    else:
+        form = OgiriThemeForm(initial_values)
+    return render(request, "ningins/theme_new_aruaru.html", {'form': form})
+
 
 @login_required
 def answer_detail(request, post_id):

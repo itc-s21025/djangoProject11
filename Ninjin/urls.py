@@ -7,6 +7,7 @@ urlpatterns = [
     path("new_narikiri/", views.ogiri_theme_new_narikiri, name="theme_new_narikiri"),
     path("new_image/", views.ImagePostView.as_view(), name="theme_new_image"),
     path("new_kaku/", views.ogiri_theme_new_kaku, name="theme_new_kaku"),
+    path("new_aruaru", views.ogiri_theme_new_aruaru, name="theme_new_aruaru"),
     path("category/", views.category, name="category"),
     path("answer_category", views.category_answer, name="answer_category"),
     path("<int:category_id>/", views.answer_list, name="answer_list"),
